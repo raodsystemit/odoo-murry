@@ -1,4 +1,0 @@
-[submodule "raodsystemit/odoo-pagando-pluggin"]
-	path = raodsystemit/odoo-pagando-pluggin
-	url = git@github.com:raodsystemit/odoo-pagando-pluggin.git
-	branch = master
