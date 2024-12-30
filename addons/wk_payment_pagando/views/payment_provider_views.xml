@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+    <record id ="pagando_payment_form" model="ir.ui.view">
+        <field name="name">pagando.payment.form.view</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="provider_credentials"]' position="after">
+                <group invisible="code != 'pagando'">
+                    <field name="pagando_user_id" password="True"/>
+                    <field name="pagando_api_key" password="True"/>
+                    <field name="pagando_webhook_token" />
+                    <field name="pagando_return_url" readonly="True"/>
+                    <field name="pagando_callback_url" readonly="True"/>
+                    <div class="alert alert-warning" role="alert">
+                        <b>Note: </b> Add this callback url at the pagando end.
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
