@@ -1,4 +1,0 @@
-[submodule "addons/wk_payment_pagando"]
-	path = addons/wk_payment_pagando
-	url = git@github.com:raodsystemit/odoo-pagando-pluggin.git
-	branch = master
