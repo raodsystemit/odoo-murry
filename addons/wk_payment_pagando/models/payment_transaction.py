@@ -92,6 +92,7 @@ class PagandoPaymentTransaction(models.Model):
         return tx
 
     def _process_notification_data(self, notification_data):
+        self.ensure_one()
         super()._process_notification_data(notification_data)
         if self.provider_code != 'pagando':
             return 

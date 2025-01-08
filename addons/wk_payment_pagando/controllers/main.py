@@ -17,14 +17,14 @@ _logger = logging.getLogger(__name__)
 class PagandoController(http.Controller):
 
     @http.route("/payment/pagando/callback", type='http', auth='public', csrf=False, save_session=False)
-    def pagando_payment_callback(self,**kwargs):
-        _logger.info(f"########### Callback received from Pagando with data : {pprint.pformat(kwargs)}")
-
+    def pagando_payment_callback(self):
+        data = request.get_json_data()
+        _logger.info(f"########### Callback received from Pagando with data : {pprint.pformat(data)}")
         try:
             received_token = request.httprequest.headers.get('pagando-webhook-token', '')
-            tx_sudo = request.env['payment.transaction'].sudo()._get_tx_from_notification_data('pagando', kwargs)
+            tx_sudo = request.env['payment.transaction'].sudo()._get_tx_from_notification_data('pagando', data)
             self._verify_notification_token(received_token, tx_sudo)
-            tx_sudo._handle_notification_data('pagando',kwargs)
+            tx_sudo._handle_notification_data('pagando',data)
         except ValidationError:
             _logger.exception("Unable to handle callback data; skipping to acknowledge.")
 
