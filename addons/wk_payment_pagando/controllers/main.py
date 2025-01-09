@@ -28,7 +28,7 @@ class PagandoController(http.Controller):
     def pagando_payment_callback(self, **kwargs):
         data = request.get_json_data()
         _logger.info(
-            f"########### Callback received from Pagando with data :{pprint.pformat(data)}"
+            f"########### Callback received from Pagando with payload :{pprint.pformat(data)}"
         )
         try:
             received_token = request.httprequest.headers.get(
@@ -40,9 +40,9 @@ class PagandoController(http.Controller):
                 ._get_tx_from_notification_data("pagando", data)
             )
             self._verify_notification_token(received_token, tx_sudo)
-            _logger.info(f"########### token verified #########")
+            _logger.info(f"########### Received token has been verified.")
             tx_sudo._handle_notification_data("pagando", data)
-            _logger.info(f"########### handled callback data successfully #########")
+            _logger.info(f"########### Odoo transaction with reference: {data.get('order_reference', '')} has been successfully processed using callback payload.")
         except ValidationError:
             _logger.exception(
                 "Unable to handle callback data; skipping to acknowledge."
