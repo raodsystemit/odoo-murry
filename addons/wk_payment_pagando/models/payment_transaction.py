@@ -12,6 +12,7 @@ from werkzeug import urls
 from odoo import models, _
 from odoo.exceptions import UserError,ValidationError
 from odoo.tools import html2plaintext
+
 _logger = logging.getLogger(__name__)
 
 class PagandoPaymentTransaction(models.Model):
